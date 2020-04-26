@@ -1,0 +1,20 @@
+<label>Nom de la personne</label>
+<br />
+
+<input type="text" (input)="updatePersonName($event)"/> <span> ----- Event binding</span>
+<br />
+
+<input type="text" [(ngModel)]="personName"/> <span> ----- binding bidirectionnel</span>
+
+<p> {{ personName }} <span>----- String interpolation sur le nom de la personne</span></p>
+
+<button 
+[disabled] = "!allowNewPerson"
+(click) = "onCreatePerson()">Ajouter une personne</button> <span>----- Property binding</span>
+
+<p>La liste des personnes</p>
+
+<p> {{ personCreationStatus }}</p>
+<app-person></app-person>
+
+<!-- <div id = "app-person"></div> -->
