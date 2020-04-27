@@ -26,6 +26,12 @@ import { Person } from './person.model';
    @Input('age')
    personAge: number = 36;
 
+   @Input()
+   editable = false;
+
+   @Output()
+   onChangePerson = new EventEmitter<Person>();
+
    constructor() {}
 
    editPerson() {
@@ -34,6 +40,7 @@ import { Person } from './person.model';
 
    savePerson() {
       this.editMode = false;
+      this.onChangePerson.emit(new Person(this.personName, this.personAge));
    }
 
    // getPersonName() {

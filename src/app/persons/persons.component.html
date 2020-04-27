@@ -25,9 +25,19 @@
 <div class="borderDiv">
     <p>La liste des personnes:</p>
     <div *ngFor = "let person of personList">
-        <app-person [name]="person.name" [age]="person.age"></app-person>
+        <app-person [name]="person.name" [age]="person.age" (onChangePerson)="onUpdatePerson($event)"
+        editable="true"></app-person>
     </div>
 </div>
-<!-- (onChangePerson)="updatePerson($event, person)" -->
+
+<br />
+
+<div class="borderDiv">
+    <p>La dernière personne mise à jour:</p>
+    <p *ngIf="lastUpdatedPerson===undefined; else whenLastUpdatedPersonExist">Aucune personne n'a été mise à jour récemment</p>
+    <ng-template #whenLastUpdatedPersonExist>
+        <app-person [name]="lastUpdatedPerson.name" [age]="lastUpdatedPerson.age"></app-person>
+    </ng-template>
+</div>
 
 <!-- <div id = "app-person"></div> -->

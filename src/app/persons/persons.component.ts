@@ -13,6 +13,7 @@ export class PersonsComponent implements OnInit {
   personName = 'Jane';
   personAge: number;
   personList: Person[] = [];
+  lastUpdatedPerson: Person;
   
   constructor() {
     setTimeout(() => {
@@ -34,9 +35,9 @@ export class PersonsComponent implements OnInit {
     this.personName = (<HTMLInputElement>event.target).value;
   }
 
-  // updatePerson(event: Person, personToUpdate: Person) {
-  //   console.log(event);
-  //   // personToUpdate = event;
-  // }
+  onUpdatePerson(event: Person) {
+    console.log(event);
+    this.lastUpdatedPerson = event;
+  }
 
 }
