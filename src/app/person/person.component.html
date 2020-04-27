@@ -1,1 +1,9 @@
-<p> Le nom de la personne est {{ personName }} et l'age de la personne est {{ age }} </p>
+<span *ngIf="!editMode"> Le nom de la personne est {{ personName }} et l'age de la personne est {{ personAge }} </span>
+<div *ngIf="editMode">
+    <span> Le nom de la personne est </span> 
+    <input type="text" [(ngModel)]="personName"/> 
+    <span>et l'age de la personne est</span> 
+    <input type="text" [(ngModel)]="personAge"/> 
+    <button *ngIf="editMode" (click)="savePerson()">Sauvegarder la modification</button>
+</div>
+<button *ngIf="!editMode" (click)="editPerson()">Editer une personne</button>

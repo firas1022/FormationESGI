@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { Person } from './person.model';
 
  
  @Component({
@@ -15,14 +17,28 @@ import { Component } from '@angular/core';
  })
  export class PersonComponent  {
     
-    personName: string = 'Patric';
-    age: number = 36;
+   editMode = false;
 
-    constructor() {}
+   // @Input()
+   @Input('name')
+   personName: string = 'Patric';
 
-    // getPersonName() {
-    //     return 'Jane';
-    // }
+   @Input('age')
+   personAge: number = 36;
+
+   constructor() {}
+
+   editPerson() {
+      this.editMode = true;
+   }
+
+   savePerson() {
+      this.editMode = false;
+   }
+
+   // getPersonName() {
+   //     return 'Jane';
+   // }
 
    //  getPerson() {
    //    return `Le nom de la personne est ${ this.personName } et l'age de la personne est ${ this.age }`;

@@ -1,20 +1,33 @@
 <label>Nom de la personne</label>
 <br />
 
-<input type="text" (input)="updatePersonName($event)"/> <span> ----- Event binding</span>
+<input type="text" (input)="updatePersonName($event)"/> 
+<span> ----- Event binding</span>
 <br />
 
-<input type="text" [(ngModel)]="personName"/> <span> ----- binding bidirectionnel</span>
+<input type="text" [(ngModel)]="personName"/> 
+<span> ----- binding bidirectionnel</span>
+<br />
+
+<label>Age de la personne</label> 
+<br />
+<input type="text" [(ngModel)]="personAge"/> 
+<br />
 
 <p> {{ personName }} <span>----- String interpolation sur le nom de la personne</span></p>
 
-<button 
-[disabled] = "!allowNewPerson"
-(click) = "onCreatePerson()">Ajouter une personne</button> <span>----- Property binding</span>
+<button [disabled] = "!allowNewPerson"
+(click) = "onCreatePerson()">Ajouter une personne</button> 
+<span>----- Property binding</span>
 
-<p>La liste des personnes</p>
+<p> {{ personCreationStatus }} <span>----- String interpolation sur "personCreationStatus"</span></p> 
 
-<p> {{ personCreationStatus }}</p>
-<app-person></app-person>
+<div class="borderDiv">
+    <p>La liste des personnes:</p>
+    <div *ngFor = "let person of personList">
+        <app-person [name]="person.name" [age]="person.age"></app-person>
+    </div>
+</div>
+<!-- (onChangePerson)="updatePerson($event, person)" -->
 
 <!-- <div id = "app-person"></div> -->

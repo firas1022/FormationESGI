@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Person } from '../person/person.model';
 
 @Component({
   selector: 'app-persons',
@@ -10,6 +11,8 @@ export class PersonsComponent implements OnInit {
   allowNewPerson: boolean = false
   personCreationStatus = 'Aucune personne n\'a été créée récemment';
   personName = 'Jane';
+  personAge: number;
+  personList: Person[] = [];
   
   constructor() {
     setTimeout(() => {
@@ -18,16 +21,22 @@ export class PersonsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.personList = [ new Person('Alice', 25), new Person('Cristophe', 18) ];
   }
 
   onCreatePerson() {
     this.personCreationStatus = 'une personne vient d\'être créée';
+    this.personList.push(new Person(this.personName, this.personAge));
   }
 
   updatePersonName(event: Event) {
     console.log(event);
     this.personName = (<HTMLInputElement>event.target).value;
-    // this.personName = 
   }
+
+  // updatePerson(event: Person, personToUpdate: Person) {
+  //   console.log(event);
+  //   // personToUpdate = event;
+  // }
 
 }
