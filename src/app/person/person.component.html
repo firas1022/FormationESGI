@@ -1,4 +1,5 @@
-<span *ngIf="!editMode"> Le nom de la personne est {{ personName }} et l'age de la personne est {{ personAge }} </span>
+<!-- <span *ngIf="!editMode" [ngClass]= "{ageSup50: personAge >= 50}"> Le nom de la personne est {{ personName }} et l'age de la personne est {{ personAge }} </span> -->
+<span *ngIf="!editMode" [ngStyle]= "{color: personAge >= 50 ? 'red' : 'green'}"> Le nom de la personne est {{ personName }} et l'age de la personne est {{ personAge }} </span>
 <div *ngIf="editMode && editable">
     <span> Le nom de la personne est </span> 
     <input type="text" [(ngModel)]="personName"/> 
