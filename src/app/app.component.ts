@@ -53,6 +53,7 @@ export class AppComponent {
   birthDateCtrl: FormControl;
   userPasswordCtrl: FormControl;
   passwordStrength = 0;
+  customInputCtrl: FormControl;
 
   static isOldEnough(control: FormControl): { [s: string]: boolean } {
     const birthDatePlus18 = new Date(control.value);
@@ -81,14 +82,15 @@ export class AppComponent {
     this.userQuestionCtrl = formBuilder.control('pet', Validators.required);
     this.birthDateCtrl = formBuilder.control('', [Validators.required, AppComponent.isOldEnough]);
     this.userPasswordCtrl = formBuilder.control('');
-
+    this.customInputCtrl = formBuilder.control('initialValue', Validators.required);
     // Define the Global FormGroup
     this.userReactiveForm = formBuilder.group({
       userName: this.userNameCtrl,
       userEmail: this.userEmailCtrl,
       userSecretQuestion: this.userQuestionCtrl,
       birthDate: this.birthDateCtrl,
-      userPassword: this.userPasswordCtrl
+      userPassword: this.userPasswordCtrl,
+      customInput: this.customInputCtrl
     });
 
     // we subscribe to every password changes

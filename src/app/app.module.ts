@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomInputComponent } from './custom-input/custom-input.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CustomInputComponent
   ],
   imports: [
     BrowserModule,
