@@ -2,26 +2,44 @@
   <h3>Formulaire piloté par le Template (Template Driven)</h3>
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form>
+      <form (ngSubmit)="register()" #userForm="ngForm">
         <div id="user-data">
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" class="form-control">
+            <input type="text" id="username" class="form-control" 
+            [(ngModel)]="user.userName" name="username" required minlength="3"
+            #userName="ngModel">
+            <div class="error-message" 
+            *ngIf="userName.dirty && userName.hasError('required')">User Name is required</div>
+            <div class="error-message" 
+            *ngIf="userName.dirty && userName.hasError('minlength')">User Name's length should be at least 3 caracters</div>
           </div>
-          <button class="btn btn-default" type="button">Suggest an Username</button>
+          
+          <button class="btn btn-default" type="button" (click)="suggestAUserName()">Suggest an Username</button>
           <div class="form-group">
             <label for="email">Mail</label>
-            <input type="email" id="email" class="form-control">
+            <input type="email" id="email" class="form-control" 
+            [(ngModel)]="user.emailAddress" name="email" required email
+            #email="ngModel">
+            <div class="error-message" 
+            *ngIf="email.dirty && email.hasError('required')">User Email is required</div>
+            <div class="error-message" 
+            *ngIf="email.dirty && email.hasError('email')">User Email should be a valid email Address</div>
           </div>
         </div>
         <div class="form-group">
           <label for="secret">Secret Questions</label>
-          <select id="secret" class="form-control">
+          <select id="secret" class="form-control" 
+          [(ngModel)]="user.secretQuestion" name="secretQuestion" required
+          #secretQuestion="ngModel">
+            <option value=""></option>
             <option value="pet">Your first Pet?</option>
             <option value="teacher">Your first teacher?</option>
           </select>
+          <div class="error-message" 
+          *ngIf="secretQuestion.dirty && userQuestionCtrl.hasError('required')">User secret is required</div>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">Submit</button>
       </form>
     </div>
   </div>
@@ -34,26 +52,53 @@
   <h3>Formulaire piloté par le Code (Reactive)</h3>
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form>
+      <form (ngSubmit)="registerReactiveForm()" (ngReset)="resetReactiveForm()" [formGroup]="userReactiveForm">
         <div id="user-data">
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" class="form-control">
+            <input type="text" id="username" class="form-control" formControlName="userName">
+            <div class="error-message" 
+            *ngIf="userNameCtrl.dirty && userNameCtrl.hasError('required')">User Name is required</div>
+            <div class="error-message" 
+            *ngIf="userNameCtrl.dirty && userNameCtrl.hasError('minlength')">User Name's length should be at least 3 caracters</div>
           </div>
-          <button class="btn btn-default" type="button">Suggest an Username</button>
+          <button class="btn btn-default" type="button" (click)= "suggestAUserNameReactiveForm()">Suggest an Username</button>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" formControlName="userPassword">
+            <div>Stength : {{ passwordStrength }} </div>
+          </div>
           <div class="form-group">
             <label for="email">Mail</label>
-            <input type="email" id="email" class="form-control">
+            <input type="email" id="email" class="form-control" formControlName="userEmail">
+            <div class="error-message" 
+            *ngIf="userEmailCtrl.dirty && userEmailCtrl.hasError('required')">User Email is required</div>
+            <div class="error-message" 
+            *ngIf="userEmailCtrl.dirty && userEmailCtrl.hasError('email')">User Email should be a valid email Address</div>
+            <div class="error-message" 
+            *ngIf="userEmailCtrl.dirty && userEmailCtrl.hasError('emailIsForbidden')">Email Address is not Allowed</div>
+          </div>
+          <div class="form-group">
+            <label for="birthDate">BirthDate</label>
+            <input type="date" id="birthDate" class="form-control" formControlName="birthDate">
+            <div class="error-message" 
+            *ngIf="birthDateCtrl.dirty && birthDateCtrl.hasError('required')">User birthDate is required</div>
+            <div class="error-message" 
+            *ngIf="birthDateCtrl.dirty && birthDateCtrl.hasError('tooYoung')">You are too young</div>
           </div>
         </div>
         <div class="form-group">
           <label for="secret">Secret Questions</label>
-          <select id="secret" class="form-control">
+          <select id="secret" class="form-control" formControlName="userSecretQuestion">
+            <option value=""></option>
             <option value="pet">Your first Pet?</option>
             <option value="teacher">Your first teacher?</option>
           </select>
+          <div class="error-message" 
+          *ngIf="userQuestionCtrl.dirty && userQuestionCtrl.hasError('required')">User secret is required</div>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit" [disabled]="userReactiveForm.invalid">Submit</button>
+        <button class="btn btn-primary" type="reset">Reinitialiser</button>
       </form>
     </div>
   </div>
