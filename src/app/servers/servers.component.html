@@ -5,6 +5,7 @@
     <div class="list-group">
       <a
         [routerLink]="['/servers', server.id]"
+        routerLinkActive="active"
         href="#"
         class="list-group-item"
         *ngFor="let server of servers">
