@@ -1,3 +1,6 @@
+import {of} from 'rxjs';
+import {delay} from 'rxjs/operators';
+
 export class ServersService {
   private servers = [
     {
@@ -18,7 +21,7 @@ export class ServersService {
   ];
 
   getServers() {
-    return this.servers;
+    return of(this.servers).pipe(delay(5000));
   }
 
   getServer(id: number) {
