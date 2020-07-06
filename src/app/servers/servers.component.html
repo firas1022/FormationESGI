@@ -5,6 +5,8 @@
     <div class="list-group">
       <a
         [routerLink]="['/servers', server.id]"
+        [queryParams]="{editing: server.id === 3}"
+        fragment="loading"
         routerLinkActive="active"
         href="#"
         class="list-group-item"
