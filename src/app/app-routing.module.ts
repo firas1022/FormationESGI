@@ -10,6 +10,7 @@ import {EditServerComponent} from './servers/edit-server/edit-server.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {AuthGuardService} from './auth-guard.service';
 import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
+import {CanLeaveEditServerService} from './servers/edit-server/can-leave-edit-server.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -28,7 +29,7 @@ const appRoutes: Routes = [
     canActivateChild: [AuthGuardService],
     children: [
       {path: ':id', component: ServerComponent},
-      {path: ':id/edit', component: EditServerComponent}
+      {path: ':id/edit', component: EditServerComponent, canDeactivate: [CanLeaveEditServerService]}
     ]
   },
   {path: 'page-not-found', component: PageNotFoundComponent},
