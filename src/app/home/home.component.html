@@ -1,6 +1,4 @@
 <h3>Voici la page d'acceuil</h3>
-
-<p> la liste des serveurs : {{ servers | json}} </p>
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
@@ -11,11 +9,11 @@
           [ngClass]="getStatusClasses(server)">
           <span
             class="badge">
-            {{ server.status | uppercase }}
+            {{ server.status }}
           </span>
-          <strong>{{ server.name | shorten: 4:9}}</strong> |
+          <strong>{{ server.name }}</strong> |
           {{ server.instanceType }} |
-          {{ server.started | date:'dd-MM-yy' }}
+          {{ server.started }}
         </li>
       </ul>
     </div>

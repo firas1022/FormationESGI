@@ -9,10 +9,8 @@ import {map} from 'rxjs/operators';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit, OnDestroy {
+export class UserComponent implements OnInit {
   id: number;
-  numbersSubscription: Subscription;
-  observableFromScratchSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService) {
@@ -25,44 +23,5 @@ export class UserComponent implements OnInit, OnDestroy {
           this.id = +params['id'];
         }
       );
-
-    const numbers = interval(1000).pipe(
-      map(data => data * 2)
-    );
-
-    this.numbersSubscription = numbers.subscribe(
-      (num: number) => console.log(num)
-    );
-
-    const observableFromScratch = new Observable((observer: Observer<string>) => {
-      setTimeout(() => {
-        observer.next('premier package dinformations');
-      }, 2000);
-      setTimeout(() => {
-        observer.next('deuxieme package dinformations');
-      }, 4000);
-      setTimeout(() => {
-        observer.complete();
-      }, 5000);
-      setTimeout(() => {
-        observer.next('troisieme pack');
-      }, 6000);
-    });
-
-    this.observableFromScratchSubscription = observableFromScratch.subscribe(
-      (data: string) => console.log(data),
-      (error: string) => console.log(error),
-      () => console.log('observable complete')
-    );
-
-  }
-
-  ngOnDestroy() {
-    this.numbersSubscription.unsubscribe();
-    this.observableFromScratchSubscription.unsubscribe();
-  }
-
-  onActivate() {
-    this.userService.activated.next(this.id);
   }
 }
